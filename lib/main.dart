@@ -97,46 +97,54 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Previsão do Tempo'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _cityController,
-                decoration: InputDecoration(
-                  labelText: 'Digite o nome da cidade',
-                  border: OutlineInputBorder(),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background.avif'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  controller: _cityController,
+                  decoration: InputDecoration(
+                    labelText: 'Digite o nome da cidade',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _getWeatherDataByCity(_cityController.text);
-              },
-              child: Text('Pesquisar'),
-            ),
-            weatherData == null
-                ? CircularProgressIndicator()
-                : Column(
-                    children: <Widget>[
-                      Text(
-                        'Cidade: ${weatherData!['name']}',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        'Condição: ${weatherData!['weather']?[0]['description'] ?? 'N/A'}',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Temperatura: ${(weatherData!['main']?['temp'] - 273.15)?.toStringAsFixed(2) ?? 'N/A'} °C',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  _getWeatherDataByCity(_cityController.text);
+                },
+                child: Text('Pesquisar'),
+              ),
+              weatherData == null
+                  ? CircularProgressIndicator()
+                  : Column(
+                      children: <Widget>[
+                        Text(
+                          'Cidade: ${weatherData!['name']}',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          'Condição: ${weatherData!['weather']?[0]['description'] ?? 'N/A'}',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Temperatura: ${(weatherData!['main']?['temp'] - 273.15)?.toStringAsFixed(2) ?? 'N/A'} °C',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+            ],
+          ),
         ),
       ),
     );
